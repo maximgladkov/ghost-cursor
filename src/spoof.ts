@@ -392,9 +392,11 @@ export const createCursor = (
       }
       return await go(0)
     },
-    async moveTo (destination: Vector): Promise<void> {
+    async moveTo (destination: Vector, options?: MoveOptions): Promise<void> {
       actions.toggleRandomMove(false)
-      await tracePath(path(previous, destination))
+      await tracePath(path(previous, destination, {
+        moveSpeed: options?.moveSpeed
+      }))
       actions.toggleRandomMove(true)
     }
   }
